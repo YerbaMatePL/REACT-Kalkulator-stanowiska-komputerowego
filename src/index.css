@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
+
 :root {
-  --gradient: linear-gradient(95deg, #213779ef 0%, #7ea1cc 100%);
+  --gradient: linear-gradient(95deg, #213779ef 0%, #0c1f36 100%);
+  --contrastColor: rgba(221, 224, 18, 0.897);
 }
 
 * {
@@ -10,6 +15,7 @@
 
 html {
   font-size: 10px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
