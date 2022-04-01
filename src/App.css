@@ -1,6 +1,4 @@
 .app {
-	max-width: 1350px;
-	min-width: 340px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
