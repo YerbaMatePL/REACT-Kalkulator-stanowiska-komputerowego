@@ -5,6 +5,9 @@
 :root {
   --gradient: linear-gradient(95deg, #213779ef 0%, #0c1f36 100%);
   --contrastColor: rgba(221, 224, 18, 0.897);
+  --headlineColor: rgb(197, 79, 10);
+  --tableBorder: rgba(170, 166, 166, 0.589);
+  --infoColor: rgb(14, 22, 100);
 }
 
 * {

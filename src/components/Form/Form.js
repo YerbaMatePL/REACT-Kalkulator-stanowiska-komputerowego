@@ -24,7 +24,7 @@ function Form() {
 						<input
 							type='text'
 							id='description'
-							placeholder='Wpisz krótki opis np. model'
+							placeholder='Podaj krótki opis np. model'
 						/>
 					</div>
 				</div>
@@ -38,7 +38,7 @@ function Form() {
 							type='number'
 							step='0.5'
 							id='price'
-							placeholder='Wpisz cenę przedmiotu'
+							placeholder='Podaj cenę przedmiotu'
 						/>
 					</div>
 				</div>
