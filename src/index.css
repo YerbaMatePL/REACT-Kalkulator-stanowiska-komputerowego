@@ -8,6 +8,8 @@
   --headlineColor: rgb(197, 79, 10);
   --tableBorder: rgba(170, 166, 166, 0.589);
   --infoColor: rgb(14, 22, 100);
+  --editColor:rgb(38, 133, 38);
+  --errorColor: rgb(223, 73, 73);
 }
 
 * {

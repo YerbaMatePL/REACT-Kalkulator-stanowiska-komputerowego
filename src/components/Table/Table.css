@@ -43,4 +43,25 @@ td {
     border-bottom: 1px solid var(--tableBorder);
 }
 
+td button {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    margin: 0 5px;
+    background-color: transparent;
+    border: 1px solid var(--tableBorder);
+    transition: border .4s ease;
+    border-radius: 2px;
+}
+
+td button:first-of-type:hover {
+    border: 1px solid var(--editColor);
+}
+td button:last-of-type:hover {
+    border: 1px solid var(--errorColor);
+}
+
+td button:active {
+    transform: scale(0.9);
+}
 

@@ -1,4 +1,6 @@
 import './Table.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function Table() {
 	return (
@@ -12,8 +14,7 @@ function Table() {
           <th>Opis</th>
           <th>Kategoria</th>
           <th>Cena</th>
-          <th>Edytuj</th>
-          <th>Usuń</th>
+          <th>Akcje</th>
         </tr>
       </thead>
     </table>
@@ -26,12 +27,10 @@ function Table() {
           <td>Myszka model hgdhsd7676, kupic w sklepie</td>
           <td>$1.38</td>
           <td>+2.01</td>
-          <td><button>Edytuj</button></td>
-          <td><button>Usuń</button></td>
+          <td><button><FontAwesomeIcon icon={faPencil}/></button><button><FontAwesomeIcon icon={faTrash}/></button></td>
         </tr>
       </tbody>
-    </table>
-  </div>
+    </table>  </div>
   </div>
 	);
 }

@@ -41,7 +41,11 @@ input {
 .form__item__btnAdd {
 	display: inline-block;
 	width: 100%;
-    transition: transform .5s ease;
+}
+   
+
+.form__item__btnAdd button {
+	transition: all .2s ease-in
 }
 
 .form__item__btnAdd button {
@@ -57,7 +61,7 @@ input {
     font-family: 'Press Start 2P', cursive;
 }
 .form__item__btnAdd :hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 .form__item__btnAdd :active {
     transform: scale(0.9);
