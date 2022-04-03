@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-function Select() {
+function Select(props) {
 	const [categories, setCategories] = useState([]);
 
 	async function fetchCategories() {
@@ -20,7 +20,7 @@ function Select() {
 				<label htmlFor='categories'>Kategoria</label>
 			</div>
 			<div className='form__item_inputs'>
-				<select id='categories'>
+				<select onChange={(e) => props.update(e.target.value)} id='categories'>
 					{categories.map((category) => (
 						<option key={category.id} value={category.id}>{category.name}</option>
 					))}

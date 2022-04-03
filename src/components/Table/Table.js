@@ -7,7 +7,7 @@ function Table() {
         <div className='tableContainer'>
 		<h2>Aktualna lista</h2>
   <div className="tblHeader">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellPadding="0" cellSpacing="0" border="0">
       <thead>
         <tr>
           <th>Przedmiot</th>
@@ -20,7 +20,7 @@ function Table() {
     </table>
   </div>
   <div className="tblContent">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellPadding="0" cellSpacing="0" border="0">
       <tbody>
         <tr>
           <td>Myszka</td>
