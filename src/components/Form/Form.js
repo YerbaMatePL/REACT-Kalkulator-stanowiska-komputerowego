@@ -3,6 +3,7 @@ import './Form.css';
 import Select from './Select/Select';
 import axios from 'axios';
 
+
 function Form() {
 	const [dataForm, setDataForm] = useState({
 		name: '',
@@ -31,20 +32,15 @@ function Form() {
 		setCategoryValue(dataFromSelect);
 	};
 
-
 	// State loading
 
 	const [loading, setLoading] = useState(false);
-
-
 
 	//  Sending data to the server and form validation
 
 	const [errorInfo, setErrorInfo] = useState('');
 
-	async function saveOnServer () { 
-		setLoading(true);
-
+	async function saveOnServer() {
 		if (
 			dataForm.name === '' ||
 			dataForm.description === '' ||
@@ -52,8 +48,9 @@ function Form() {
 		) {
 			setErrorInfo('Uzupełnij wszystkie pola ⇩');
 		} else {
+			setLoading(true);
 			
-			await insert()
+			await insert();
 
 			setDataForm({
 				name: '',
@@ -67,17 +64,16 @@ function Form() {
 
 			setLoading(false);
 		}
-	};
-		// Downloading the current item list from the server
-		async function fetchCurrentList() {
-			const currentList = await axios.get('http://localhost:3005/items');
-			console.log(currentList.data);
-		}
+	}
+	// Downloading the current item list from the server
+	async function fetchCurrentList() {
+		const currentList = await axios.get('http://localhost:3005/items');
+		console.log(currentList.data);
+	}
 
-		async function insert() {
-			await axios.post('http://localhost:3005/items', dataForm);
-		}
-
+	async function insert() {
+		await axios.post('http://localhost:3005/items', dataForm);
+	}
 
 	return (
 		<div className='form'>
@@ -138,12 +134,13 @@ function Form() {
 				</div>
 				<div className='form__item'>
 					<div className='form__item__btnAdd'>
-						{loading ? <button onClick={saveOnServer} type='submit'>
-							Ładuje
-						</button>: <button onClick={saveOnServer} type='submit'>
-							Dodaj
-						</button>}
-						
+						{loading ?  <button onClick={saveOnServer} type='submit'>
+						<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+						</button> :
+							<button onClick={saveOnServer} type='submit'>
+								Dodaj
+							</button>
+						}
 					</div>
 				</div>
 			</div>
