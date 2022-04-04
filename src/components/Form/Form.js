@@ -11,7 +11,7 @@ function Form() {
 		price: '',
 	});
 
-	const printValues = (e) => {
+	const preventDefault = (e) => {
 		e.preventDefault();
 	};
 
@@ -23,24 +23,6 @@ function Form() {
 		});
 	};
 
-	//  Sending data to the server and form validation
-
-	const [errorInfo, setErrorInfo] = useState('');
-
-	const saveOnServer = () => {
-		if (
-			dataForm.name === '' ||
-			dataForm.description === '' ||
-			dataForm.categoryId === '' ||
-			dataForm.price === ''
-		) {
-			setErrorInfo('Uzupełnij wszystkie pola ⇩');
-		} else {
-			setErrorInfo('');
-			axios.post('http://localhost:3005/items', dataForm);
-		}
-	};
-
 	// State from the Select component
 
 	const [categoryValue, setCategoryValue] = useState('1');
@@ -49,9 +31,57 @@ function Form() {
 		setCategoryValue(dataFromSelect);
 	};
 
+
+	// State loading
+
+	const [loading, setLoading] = useState(false);
+
+
+
+	//  Sending data to the server and form validation
+
+	const [errorInfo, setErrorInfo] = useState('');
+
+	async function saveOnServer () { 
+		setLoading(true);
+
+		if (
+			dataForm.name === '' ||
+			dataForm.description === '' ||
+			dataForm.price === ''
+		) {
+			setErrorInfo('Uzupełnij wszystkie pola ⇩');
+		} else {
+			
+			await insert()
+
+			setDataForm({
+				name: '',
+				description: '',
+				categoryId: '',
+				price: '',
+			});
+
+			setErrorInfo('');
+			await fetchCurrentList();
+
+			setLoading(false);
+		}
+	};
+		// Downloading the current item list from the server
+		async function fetchCurrentList() {
+			const currentList = await axios.get('http://localhost:3005/items');
+			console.log(currentList.data);
+		}
+
+		async function insert() {
+			await axios.post('http://localhost:3005/items', dataForm);
+		}
+
+
 	return (
 		<div className='form'>
-			<div className='form__items' onSubmit={printValues}>
+			<div className='form__items' onSubmit={preventDefault}>
 				<p className='form__error'>{errorInfo}</p>
 				<div className='form__item'>
 					<div className='form__item_labels'>
@@ -101,16 +131,19 @@ function Form() {
 							min='0'
 							id='price'
 							placeholder='Podaj cenę przedmiotu'
-							onKeyPress={(e) => !/[0-9,]/.test(e.key) && e.preventDefault()}
+							onKeyPress={(e) => !/[0-9.,]/.test(e.key) && e.preventDefault()}
 							onChange={updateField}
 						/>
 					</div>
 				</div>
 				<div className='form__item'>
 					<div className='form__item__btnAdd'>
-						<button onClick={saveOnServer} type='submit'>
+						{loading ? <button onClick={saveOnServer} type='submit'>
+							Ładuje
+						</button>: <button onClick={saveOnServer} type='submit'>
 							Dodaj
-						</button>
+						</button>}
+						
 					</div>
 				</div>
 			</div>
