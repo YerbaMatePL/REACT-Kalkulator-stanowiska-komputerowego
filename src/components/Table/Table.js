@@ -1,19 +1,21 @@
-// import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
-// import axios from 'axios';
+import axios from 'axios';
 
 function Table() {
-// 	// Downloading the current item list from the server
-// 	async function fetchCurrentList() {
-// 		const currentList = await axios.get('http://localhost:3005/items');
-// 		console.log(currentList.data);
-// 	}
+	const [currentListValue, setCurrentListValue] = useState([]);
 
-// 	useEffect(() => {
-// 		fetchCurrentList();
-// 	}, []);
+	async function fetchCurrentList() {
+	const currentList = await axios.get('http://localhost:3005/items');
+
+	setCurrentListValue(currentList.data);
+	}
+
+	useEffect(() => {
+		fetchCurrentList();
+	}, []);
 
 	return (
 		<div className='tableContainer'>
@@ -34,20 +36,22 @@ function Table() {
 			<div className='tblContent'>
 				<table cellPadding='0' cellSpacing='0' border='0'>
 					<tbody>
-						<tr>
-							<td>Myszka</td>
-							<td>Myszka model hgdhsd7676, kupic w sklepie</td>
-							<td>$1.38</td>
-							<td>+2.01</td>
-							<td>
-								<button>
-									<FontAwesomeIcon icon={faPencil} />
-								</button>
-								<button>
-									<FontAwesomeIcon icon={faTrash} />
-								</button>
-							</td>
-						</tr>
+						{currentListValue.map((value) => (
+							<tr>
+								<td>{value.name}</td>
+								<td>{value.description}</td>
+								<td>{value.category.name}</td>
+								<td>{value.price} zł</td>
+								<td>
+									<button>
+										<FontAwesomeIcon icon={faPencil} />
+									</button>
+									<button>
+										<FontAwesomeIcon icon={faTrash} />
+									</button>
+								</td>
+							</tr>
+            ))}
 					</tbody>
 				</table>{' '}
 			</div>

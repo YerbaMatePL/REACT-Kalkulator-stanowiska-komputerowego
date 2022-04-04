@@ -49,7 +49,7 @@ function Form() {
 			setErrorInfo('Uzupełnij wszystkie pola ⇩');
 		} else {
 			setLoading(true);
-			
+
 			await insert();
 
 			setDataForm({
@@ -60,16 +60,20 @@ function Form() {
 			});
 
 			setErrorInfo('');
-			await fetchCurrentList();
+			// await fetchCurrentList();
 
 			setLoading(false);
 		}
 	}
-	// Downloading the current item list from the server
-	async function fetchCurrentList() {
-		const currentList = await axios.get('http://localhost:3005/items');
-		console.log(currentList.data);
-	}
+	// Downloading the current item list from the server 
+	
+
+	// async function fetchCurrentList() {
+	// 	const currentList = await axios.get('http://localhost:3005/items');
+	// 	console.log(currentList.data)
+	// }
+
+	
 
 	async function insert() {
 		await axios.post('http://localhost:3005/items', dataForm);
@@ -135,7 +139,7 @@ function Form() {
 				<div className='form__item'>
 					<div className='form__item__btnAdd'>
 						{loading ?  <button onClick={saveOnServer} type='submit'>
-						<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+						<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
 						</button> :
 							<button onClick={saveOnServer} type='submit'>
 								Dodaj
