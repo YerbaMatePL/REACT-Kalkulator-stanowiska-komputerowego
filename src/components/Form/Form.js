@@ -3,8 +3,7 @@ import './Form.css';
 import Select from './Select/Select';
 import axios from 'axios';
 
-
-function Form() {
+function Form(props) {
 	const [dataForm, setDataForm] = useState({
 		name: '',
 		description: '',
@@ -50,34 +49,30 @@ function Form() {
 		} else {
 			setLoading(true);
 
-			await insert();
+			await sendData();
 
-			setDataForm({
-				name: '',
-				description: '',
-				categoryId: '',
-				price: '',
-			});
+			props.update(dataForm);
 
-			setErrorInfo('');
-			// await fetchCurrentList();
+			clearForm()
 
 			setLoading(false);
 		}
 	}
-	// Downloading the current item list from the server 
-	
 
-	// async function fetchCurrentList() {
-	// 	const currentList = await axios.get('http://localhost:3005/items');
-	// 	console.log(currentList.data)
-	// }
-
-	
-
-	async function insert() {
+	async function sendData() {
 		await axios.post('http://localhost:3005/items', dataForm);
 	}
+
+	const clearForm = () => {
+		setDataForm({
+			name: '',
+			description: '',
+			categoryId: '',
+			price: '',
+		});
+
+		setErrorInfo('');
+	};
 
 	return (
 		<div className='form'>
@@ -138,13 +133,20 @@ function Form() {
 				</div>
 				<div className='form__item'>
 					<div className='form__item__btnAdd'>
-						{loading ?  <button onClick={saveOnServer} type='submit'>
-						<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-						</button> :
+						{loading ? (
+							<button onClick={saveOnServer} type='submit'>
+								<div className='lds-ring'>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+								</div>
+							</button>
+						) : (
 							<button onClick={saveOnServer} type='submit'>
 								Dodaj
 							</button>
-						}
+						)}
 					</div>
 				</div>
 			</div>
