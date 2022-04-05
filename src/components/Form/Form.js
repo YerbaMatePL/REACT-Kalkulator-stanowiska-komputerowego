@@ -53,7 +53,7 @@ function Form(props) {
 
 			props.update(dataForm);
 
-			clearForm()
+			clearForm();
 
 			setLoading(false);
 		}
@@ -74,6 +74,10 @@ function Form(props) {
 		setErrorInfo('');
 	};
 
+	const onKeyDownHandler = (e) => {
+		e.key === 'Enter' && saveOnServer();
+	};
+
 	return (
 		<div className='form'>
 			<div className='form__items' onSubmit={preventDefault}>
@@ -84,6 +88,7 @@ function Form(props) {
 					</div>
 					<div className='form__item_inputs'>
 						<input
+							onKeyDown={onKeyDownHandler}
 							type='text'
 							id='item'
 							name='name'
@@ -99,6 +104,7 @@ function Form(props) {
 					</div>
 					<div className='form__item_inputs'>
 						<input
+							onKeyDown={onKeyDownHandler}
 							value={dataForm.description}
 							name='description'
 							type='text'
@@ -119,6 +125,7 @@ function Form(props) {
 					</div>
 					<div className='form__item_inputs'>
 						<input
+							onKeyDown={onKeyDownHandler}
 							name='price'
 							value={dataForm.price}
 							type='number'

@@ -11,9 +11,6 @@ function App() {
 		setNewRecord(dataFromTheForm)
 	}
 
-	console.log(newRecord);
-	
-
 	return (
 		<div className='app wrapper'>
 			<h1 className='app__title'>Kalkulator stanowiska komputerowego</h1>

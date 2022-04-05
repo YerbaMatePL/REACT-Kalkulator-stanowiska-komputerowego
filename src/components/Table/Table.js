@@ -3,6 +3,7 @@ import './Table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Summary from './Summary';
 
 function Table(props) {
 	const [currentListValue, setCurrentListValue] = useState([]);
@@ -17,9 +18,8 @@ function Table(props) {
 		fetchCurrentList();
 	}, [props.valueNewRecord]);
 
-
-  console.log(currentListValue);
 	return (
+    <div>
 		<div className='tblContainer'>
 			<h2>Aktualna lista</h2>
 			<div className='tblHeader'>
@@ -57,9 +57,11 @@ function Table(props) {
 							</tr>
             ))}
 					</tbody>
-				</table>{' '}
+				</table>
 			</div>
 		</div>
+    <Summary></Summary>
+    </div>
 	);
 }
 
