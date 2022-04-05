@@ -45,7 +45,7 @@ input {
    
 
 .form__item__btnAdd button {
-	transition: all .2s ease-in
+	transition: transform .2s ease-in
 }
 
 .form__item__btnAdd button {
@@ -64,7 +64,7 @@ input {
     transform: scale(1.1);
 }
 .form__item__btnAdd :active {
-    transform: scale(0.9);
+    transform: scale(.9);
 }
 
 .form__error {

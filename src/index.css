@@ -10,6 +10,7 @@
   --infoColor: rgb(14, 22, 100);
   --editColor:rgb(38, 133, 38);
   --errorColor: rgb(223, 73, 73);
+  --bgColor: rgb(237, 245, 245);
 }
 
 * {
