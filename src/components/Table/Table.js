@@ -18,6 +18,14 @@ function Table(props) {
 		fetchCurrentList();
 	}, [props.valueNewRecord]);
 
+
+	// delete record in table 
+
+	async function deleteRecord() {
+		await  axios.delete('http://localhost:3005/items/:id')
+		await fetchCurrentList();
+	}
+
 	return (
     <div>
 		<div className='tblContainer'>
@@ -49,7 +57,7 @@ function Table(props) {
 									<button>
 										<FontAwesomeIcon icon={faPencil} />
 									</button>
-									<button>
+									<button onClick={deleteRecord}> 
 										<FontAwesomeIcon icon={faTrash} />
 									</button>
                   </div>
