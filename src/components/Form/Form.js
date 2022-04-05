@@ -150,7 +150,7 @@ function Form(props) {
 								</div>
 							</button>
 						) : (
-							<button onClick={saveOnServer} type='submit'>
+							<button onClick={saveOnServer} type='submit' title='Dodaj do listy'>
 								Dodaj
 							</button>
 						)}

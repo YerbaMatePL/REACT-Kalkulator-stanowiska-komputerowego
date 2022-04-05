@@ -1,14 +1,13 @@
 .tblContainer {
-	margin-top: 50px;
+	margin: 50px 0;
 }
-
 h2 {
 	font-size: 3.5rem;
-    color: var(--headlineColor);
+    color: var(--infoColor);
 	text-transform: uppercase;
 	font-weight: 300;
 	text-align: center;
-	margin-bottom: 15px;
+	margin-bottom: 50px;
 }
 table {
 	width: 100%;

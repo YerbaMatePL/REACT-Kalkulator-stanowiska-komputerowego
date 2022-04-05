@@ -3,7 +3,7 @@ import './Table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import Summary from './Summary';
+import Summary from '../Summary/Summary';
 
 function Table(props) {
 	const [currentListValue, setCurrentListValue] = useState([]);
@@ -54,11 +54,11 @@ function Table(props) {
 								<td>{value.price} zł</td>
 								<td>
                   <div className='btnsContainer'>
-									<button>
+									<button title="Edytuj rekord">
 										<FontAwesomeIcon icon={faPencil} />
 									</button>
-									<button onClick={deleteRecord}> 
-										<FontAwesomeIcon icon={faTrash} />
+									<button onClick={deleteRecord} title="Usuń rekord"> 
+										<FontAwesomeIcon icon={faTrash}  />
 									</button>
                   </div>
 								</td>

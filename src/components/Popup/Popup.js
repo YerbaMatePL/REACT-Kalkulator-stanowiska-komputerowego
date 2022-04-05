@@ -3,7 +3,7 @@ import './Popup.css';
 function Popup() {
 	return (
 		<div className='popup wrapper'>
-			<div className='popup__Form '>
+			<div className='popup__Form  '>
                 <h2>Edytuj zadanie:</h2>
                 <input type="text" placeholder='Podaj nazwę przedmiotu...'></input>
                 <input type="text" placeholder='Podaj któtki opis...'></input>
