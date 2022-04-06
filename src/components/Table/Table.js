@@ -29,9 +29,12 @@ function Table(props) {
 	}
 
 	// summary data 
-	
+
 	const quantityOfItems = currentListValue.length;
 
+	const priceArray = currentListValue.map(price => Number((price.price)));
+
+	const totalPrice = priceArray.reduce((partialSum, a) => partialSum + a, 0);
 
 
 	return (
@@ -76,7 +79,7 @@ function Table(props) {
 				</table>
 			</div>
 		</div>
-    <Summary quantityOfItems={quantityOfItems}></Summary>
+    <Summary quantityOfItems={quantityOfItems} totalPrice={totalPrice}></Summary>
     </div>
 	);
 }

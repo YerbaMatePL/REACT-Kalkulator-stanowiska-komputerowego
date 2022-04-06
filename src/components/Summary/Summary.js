@@ -9,7 +9,7 @@ function Summary(props) {
 					<p>Ilość przedmiotów: <span>{props.quantityOfItems}</span>szt</p>
 				</div>
 				<div className='summaryItem'>
-					<p>Łączna cena: <span>2900</span>zł</p>
+					<p>Łączna cena: <span>{props.totalPrice}</span>zł</p>
 				</div>
 			</div>
 		</div>
