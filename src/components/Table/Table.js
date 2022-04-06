@@ -12,19 +12,27 @@ function Table(props) {
 	const currentList = await axios.get('http://localhost:3005/items');
 
 	setCurrentListValue(currentList.data);
+
+	
 	}
 
 	useEffect(() => {
 		fetchCurrentList();
 	}, [props.valueNewRecord]);
 
-
+	
 	// delete record in table 
 
 	async function deleteRecord() {
 		await  axios.delete('http://localhost:3005/items/:id')
 		await fetchCurrentList();
 	}
+
+	// summary data 
+	
+	const quantityOfItems = currentListValue.length;
+
+
 
 	return (
     <div>
@@ -68,7 +76,7 @@ function Table(props) {
 				</table>
 			</div>
 		</div>
-    <Summary></Summary>
+    <Summary quantityOfItems={quantityOfItems}></Summary>
     </div>
 	);
 }
