@@ -72,3 +72,72 @@ td button:active {
     transform: scale(0.9);
 }
 
+/* modal*/
+
+.modal {
+	visibility:hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+	background-color: rgba(30, 31, 20, 0.658);
+}
+
+
+.modal__Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+	width: 60%;
+	height: 500px;
+    background-color: var(--bgColor);
+    border-radius: 15px;
+}
+
+.modal__Form input, select {
+    width: 37vw;
+}
+
+.modal__Form select {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+.modal__Form__btnsContainer {
+    width: 30vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal__Form__btn {
+    margin-top: 20px;
+    width: 10vw;
+    padding: 15px;
+    background-color: var(--contrastColor);
+    border: 2px solid black;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+    transition: transform .2s ease-in;
+}
+
+.modal__Form__btn:hover {
+    transform: scale(1.1);
+}
+.modal__Form__btn:active {
+    transform: scale(.9);
+}
+
+
+.visbile {
+	visibility: visible;
+}
