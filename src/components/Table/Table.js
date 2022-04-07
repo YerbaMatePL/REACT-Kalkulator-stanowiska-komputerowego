@@ -40,31 +40,94 @@ function Table(props) {
 	const [dataRecord, setDataRecord] = useState({
 		name: '',
 		description: '',
+		categoryId: '',
 		price: '',
 	});
-	
+
+	const [categoriesInModal, setCategoriesInModal] = useState([]);
+
+	async function fetchAllCategories() {
+		const response = await axios.get('http://localhost:3005/categories');
+
+		setCategoriesInModal(response.data);
+	}
 
 	let recordToEdit;
 
-	
 	const openModal = (e) => {
-		
-		recordToEdit = (e.target.closest('tr')).children;
-		console.log(recordToEdit[3].textContent);
+		fetchAllCategories();
 
+		recordToEdit = e.target.closest('tr').children;
 
 		setDataRecord({
 			name: recordToEdit[0].textContent,
 			description: recordToEdit[1].textContent,
+			categoryId: recordToEdit[2].id,
 			price: recordToEdit[3].textContent,
 		});
+
 		setOpenModalValue('visbile');
 	};
 
-
+	console.log(dataRecord.categoryId);
 
 	const closeModal = () => {
 		setOpenModalValue('');
+	};
+
+	const changeRecordText = (e) => {
+		setDataRecord({
+			...dataRecord,
+			[e.target.name]: e.target.value,
+			[e.target.description]: e.target.value,
+			[e.target.categoryId]: e.target.value,
+			[e.target.price]: e.target.value,
+		});
+	};
+
+	const createOption = (categoryId, categoryName) => {
+		const stateCategoryId = Number(dataRecord.categoryId);
+
+		console.log(
+			first({
+				name: 'dupa',
+			})
+		);
+		console.log(
+			second({
+				name: 'dupa',
+			})
+		);
+		// return (categoryId === stateCategoryId ? (
+		// 	<option selected key={categoryId} value={categoryId}>
+		// 		{categoryName}
+		// 	</option>
+		// ) : (
+		// 	<option key={categoryId} value={categoryId}>
+		// 		{categoryName}
+		// 	</option>
+		// ));
+
+		if (categoryId === stateCategoryId) {
+			return (
+				<option selected key={categoryId} value={categoryId}>
+					{categoryName}
+				</option>
+			);
+		} else {
+			return (
+				<option key={categoryId} value={categoryId}>
+					{categoryName}
+				</option>
+			);
+		}
+	};
+
+	const first = (item) => item.name;
+	const second = (item) => {
+		const result = item.name;
+
+		return result;
 	};
 
 	return (
@@ -91,7 +154,7 @@ function Table(props) {
 								<tr key={value.id}>
 									<td>{value.name}</td>
 									<td>{value.description}</td>
-									<td>{value.category.name}{value.category.id}</td>
+									<td id={value.category.id}>{value.category.name}</td>
 									<td>{value.price}</td>
 									<td>
 										<div className='btnsContainer'>
@@ -113,20 +176,25 @@ function Table(props) {
 				<div className='modal__Form  '>
 					<h2>Edytuj zadanie:</h2>
 					<input
+						name='name'
 						value={dataRecord.name}
+						onChange={changeRecordText}
 						type='text'
 						placeholder='Podaj nazwę przedmiotu...'
 					></input>
 					<input
+						name='description'
 						value={dataRecord.description}
 						type='text'
 						placeholder='Podaj któtki opis...'
 					></input>
-					<select>
-						<option>Przykładowa kategoria</option>
-						<option>Przykładowa kategoria</option>
+					<select name='categoryId'>
+						{categoriesInModal.map((category) => {
+							return createOption(category.id, category.name);
+						})}
 					</select>
 					<input
+						name='price'
 						value={dataRecord.price}
 						type='number'
 						placeholder='Podaj cenę przedmiotu...'
