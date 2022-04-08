@@ -33,7 +33,7 @@ function Table(props) {
 
 	const totalPrice = priceArray.reduce((partialSum, a) => partialSum + a, 0);
 
-	// Edit record
+	// edit record
 
 	const [openModalValue, setOpenModalValue] = useState('');
 
@@ -52,24 +52,21 @@ function Table(props) {
 		setCategoriesInModal(response.data);
 	}
 
-	let recordToEdit;
+	const [selectedItemId, setSelectedItemId] = useState();
 
-	const openModal = (e) => {
+	const openModal = (value) => {
 		fetchAllCategories();
 
-		recordToEdit = e.target.closest('tr').children;
-
+		setSelectedItemId(value.id);
 		setDataRecord({
-			name: recordToEdit[0].textContent,
-			description: recordToEdit[1].textContent,
-			categoryId: recordToEdit[2].id,
-			price: recordToEdit[3].textContent,
+			name: value.name,
+			description: value.description,
+			categoryId: value.category.id,
+			price: value.price,
 		});
 
 		setOpenModalValue('visbile');
 	};
-
-	console.log(dataRecord.categoryId);
 
 	const closeModal = () => {
 		setOpenModalValue('');
@@ -85,50 +82,23 @@ function Table(props) {
 		});
 	};
 
-	const createOption = (categoryId, categoryName) => {
-		const stateCategoryId = Number(dataRecord.categoryId);
-
-		console.log(
-			first({
-				name: 'dupa',
-			})
+	async function saveEditedRecord() {
+		await axios.put(
+			`http://localhost:3005/items/${selectedItemId}`,
+			dataRecord
 		);
-		console.log(
-			second({
-				name: 'dupa',
-			})
-		);
-		// return (categoryId === stateCategoryId ? (
-		// 	<option selected key={categoryId} value={categoryId}>
-		// 		{categoryName}
-		// 	</option>
-		// ) : (
-		// 	<option key={categoryId} value={categoryId}>
-		// 		{categoryName}
-		// 	</option>
-		// ));
+		fetchCurrentList();
+		closeModal();
+	};
 
-		if (categoryId === stateCategoryId) {
-			return (
-				<option selected key={categoryId} value={categoryId}>
-					{categoryName}
-				</option>
-			);
-		} else {
-			return (
-				<option key={categoryId} value={categoryId}>
-					{categoryName}
-				</option>
-			);
+	const onKeyDownHandler = (e) => {
+
+		if (e.key === 'Enter') {
+			saveEditedRecord() 
+		} else if (e.key === 'Escape'){
+			closeModal()
 		}
-	};
-
-	const first = (item) => item.name;
-	const second = (item) => {
-		const result = item.name;
-
-		return result;
-	};
+	}  
 
 	return (
 		<div>
@@ -158,7 +128,12 @@ function Table(props) {
 									<td>{value.price}</td>
 									<td>
 										<div className='btnsContainer'>
-											<button title='Edytuj rekord' onClick={openModal}>
+											<button
+												title='Edytuj rekord'
+												onClick={() => {
+													openModal(value);
+												}}
+											>
 												<FontAwesomeIcon icon={faPencil} />
 											</button>
 											<button onClick={deleteRecord} title='Usuń rekord'>
@@ -172,7 +147,7 @@ function Table(props) {
 					</table>
 				</div>
 			</div>
-			<div className={`modal wrapper bgc ${openModalValue}`}>
+			<div  onKeyDown={onKeyDownHandler} className={`modal wrapper bgc ${openModalValue}`}>
 				<div className='modal__Form  '>
 					<h2>Edytuj zadanie:</h2>
 					<input
@@ -187,20 +162,31 @@ function Table(props) {
 						value={dataRecord.description}
 						type='text'
 						placeholder='Podaj któtki opis...'
+						onChange={changeRecordText}
 					></input>
-					<select name='categoryId'>
-						{categoriesInModal.map((category) => {
-							return createOption(category.id, category.name);
-						})}
+					<select
+						name='categoryId'
+						onChange={changeRecordText}
+						value={dataRecord.categoryId}
+					>
+						{categoriesInModal.map((category) => (
+							<option key={category.id} value={category.id}>
+								{category.name}
+							</option>
+						))}
 					</select>
 					<input
 						name='price'
 						value={dataRecord.price}
 						type='number'
 						placeholder='Podaj cenę przedmiotu...'
+						onChange={changeRecordText}
 					></input>
 					<div className='modal__Form__btnsContainer'>
-						<button className=' modal__Form__btn modal__Form__btn--btnConfirm'>
+						<button
+							onClick={saveEditedRecord}
+							className=' modal__Form__btn modal__Form__btn--btnConfirm'
+						>
 							Zatwierdź
 						</button>
 						<button
