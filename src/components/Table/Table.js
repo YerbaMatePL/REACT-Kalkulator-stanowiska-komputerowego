@@ -6,6 +6,8 @@ import axios from 'axios';
 import Summary from '../Summary/Summary';
 
 function Table(props) {
+	// // fetch data from server to table
+
 	const [currentListValue, setCurrentListValue] = useState([]);
 
 	async function fetchCurrentList() {
@@ -33,11 +35,11 @@ function Table(props) {
 
 	const totalPrice = priceArray.reduce((partialSum, a) => partialSum + a, 0);
 
-	// edit record
+	// edit record in table 
 
 	const [openModalValue, setOpenModalValue] = useState('');
 
-	const [dataRecord, setDataRecord] = useState({
+	const [dataSelectedRecord, setdataSelectedRecord] = useState({
 		name: '',
 		description: '',
 		categoryId: '',
@@ -58,7 +60,7 @@ function Table(props) {
 		fetchAllCategories();
 
 		setSelectedItemId(value.id);
-		setDataRecord({
+		setdataSelectedRecord({
 			name: value.name,
 			description: value.description,
 			categoryId: value.category.id,
@@ -68,37 +70,53 @@ function Table(props) {
 		setOpenModalValue('visbile');
 	};
 
-	const closeModal = () => {
-		setOpenModalValue('');
-	};
-
 	const changeRecordText = (e) => {
-		setDataRecord({
-			...dataRecord,
+		setdataSelectedRecord({
+			...dataSelectedRecord,
 			[e.target.name]: e.target.value,
 			[e.target.description]: e.target.value,
 			[e.target.categoryId]: e.target.value,
 			[e.target.price]: e.target.value,
 		});
 	};
+	
+	const closeModal = () => {
+		setOpenModalValue('');
+	};
+
+	const [errorInfoEditedRecord, setErrorInfoEditedRecord] = useState('');
 
 	async function saveEditedRecord() {
-		await axios.put(
-			`http://localhost:3005/items/${selectedItemId}`,
-			dataRecord
-		);
-		fetchCurrentList();
-		closeModal();
+		if (
+			dataSelectedRecord.name === '' ||
+			dataSelectedRecord.description === '' ||
+			dataSelectedRecord.price === ''
+		) {
+			setErrorInfoEditedRecord('Uzupełnij wszystkie pola ⇩');
+		} else {
+			clearErrorInfo();
+
+			await axios.put(
+				`http://localhost:3005/items/${selectedItemId}`,
+				dataSelectedRecord
+			);
+			
+			fetchCurrentList();
+			closeModal();
+		}
+	}
+
+	const clearErrorInfo = () => {
+		setErrorInfoEditedRecord('');
 	};
 
 	const onKeyDownHandler = (e) => {
-
 		if (e.key === 'Enter') {
-			saveEditedRecord() 
-		} else if (e.key === 'Escape'){
-			closeModal()
+			saveEditedRecord();
+		} else if (e.key === 'Escape') {
+			closeModal();
 		}
-	}  
+	};
 
 	return (
 		<div>
@@ -147,19 +165,23 @@ function Table(props) {
 					</table>
 				</div>
 			</div>
-			<div  onKeyDown={onKeyDownHandler} className={`modal wrapper bgc ${openModalValue}`}>
+			<div
+				onKeyDown={onKeyDownHandler}
+				className={`modal wrapper bgc ${openModalValue}`}
+			>
 				<div className='modal__Form  '>
 					<h2>Edytuj zadanie:</h2>
+					<p className='form__error'>{errorInfoEditedRecord}</p>
 					<input
 						name='name'
-						value={dataRecord.name}
+						value={dataSelectedRecord.name}
 						onChange={changeRecordText}
 						type='text'
 						placeholder='Podaj nazwę przedmiotu...'
 					></input>
 					<input
 						name='description'
-						value={dataRecord.description}
+						value={dataSelectedRecord.description}
 						type='text'
 						placeholder='Podaj któtki opis...'
 						onChange={changeRecordText}
@@ -167,7 +189,7 @@ function Table(props) {
 					<select
 						name='categoryId'
 						onChange={changeRecordText}
-						value={dataRecord.categoryId}
+						value={dataSelectedRecord.categoryId}
 					>
 						{categoriesInModal.map((category) => (
 							<option key={category.id} value={category.id}>
@@ -177,10 +199,12 @@ function Table(props) {
 					</select>
 					<input
 						name='price'
-						value={dataRecord.price}
+						value={dataSelectedRecord.price}
 						type='number'
+						min='0'
 						placeholder='Podaj cenę przedmiotu...'
 						onChange={changeRecordText}
+						onKeyPress={(e) => !/[0-9.,]/.test(e.key) && e.preventDefault()}
 					></input>
 					<div className='modal__Form__btnsContainer'>
 						<button
