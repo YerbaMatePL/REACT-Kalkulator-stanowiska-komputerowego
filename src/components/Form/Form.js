@@ -23,7 +23,7 @@ function Form(props) {
 		});
 	};
 
-	// State from the Select component
+	// state from the Select component
 
 	const [categoryValue, setCategoryValue] = useState('1');
 
@@ -31,11 +31,11 @@ function Form(props) {
 		setCategoryValue(dataFromSelect);
 	};
 
-	// State loading
+	// state loading
 
 	const [loading, setLoading] = useState(false);
 
-	//  Sending data to the server and form validation
+	//  sending data to the server and form validation
 
 	const [errorInfo, setErrorInfo] = useState('');
 
@@ -92,7 +92,7 @@ function Form(props) {
 							type='text'
 							id='item'
 							name='name'
-							placeholder='Podaj nazwę przedmiotu'
+							placeholder='Podaj nazwę przedmiotu...'
 							value={dataForm.name}
 							onChange={updateField}
 						/>
@@ -109,7 +109,7 @@ function Form(props) {
 							name='description'
 							type='text'
 							id='description'
-							placeholder='Podaj krótki opis np. model'
+							placeholder='Podaj krótki opis przedmiotu...'
 							onChange={updateField}
 						/>
 					</div>
@@ -132,7 +132,7 @@ function Form(props) {
 							step='0.5'
 							min='0'
 							id='price'
-							placeholder='Podaj cenę przedmiotu'
+							placeholder='Podaj cenę przedmiotu...'
 							onKeyPress={(e) => !/[0-9.,]/.test(e.key) && e.preventDefault()}
 							onChange={updateField}
 						/>

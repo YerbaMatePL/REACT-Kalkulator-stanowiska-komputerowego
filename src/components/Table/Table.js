@@ -37,7 +37,7 @@ function Table(props) {
 
 	// edit record in table 
 
-	const [openModalValue, setOpenModalValue] = useState('');
+	const [openModalToEditValue, setopenModalToEditValue] = useState('');
 
 	const [dataSelectedRecord, setdataSelectedRecord] = useState({
 		name: '',
@@ -56,7 +56,7 @@ function Table(props) {
 
 	const [selectedItemId, setSelectedItemId] = useState();
 
-	const openModal = (value) => {
+	const openModalToEdit = (value) => {
 		fetchAllCategories();
 
 		setSelectedItemId(value.id);
@@ -67,21 +67,18 @@ function Table(props) {
 			price: value.price,
 		});
 
-		setOpenModalValue('visbile');
+		setopenModalToEditValue('visbile');
 	};
 
 	const changeRecordText = (e) => {
 		setdataSelectedRecord({
 			...dataSelectedRecord,
 			[e.target.name]: e.target.value,
-			[e.target.description]: e.target.value,
-			[e.target.categoryId]: e.target.value,
-			[e.target.price]: e.target.value,
 		});
 	};
 	
-	const closeModal = () => {
-		setOpenModalValue('');
+	const closeModalToEdit = () => {
+		setopenModalToEditValue('');
 	};
 
 	const [errorInfoEditedRecord, setErrorInfoEditedRecord] = useState('');
@@ -100,9 +97,9 @@ function Table(props) {
 				`http://localhost:3005/items/${selectedItemId}`,
 				dataSelectedRecord
 			);
-			
+
 			fetchCurrentList();
-			closeModal();
+			closeModalToEdit();
 		}
 	}
 
@@ -114,7 +111,7 @@ function Table(props) {
 		if (e.key === 'Enter') {
 			saveEditedRecord();
 		} else if (e.key === 'Escape') {
-			closeModal();
+			closeModalToEdit();
 		}
 	};
 
@@ -149,7 +146,7 @@ function Table(props) {
 											<button
 												title='Edytuj rekord'
 												onClick={() => {
-													openModal(value);
+													openModalToEdit(value);
 												}}
 											>
 												<FontAwesomeIcon icon={faPencil} />
@@ -167,9 +164,9 @@ function Table(props) {
 			</div>
 			<div
 				onKeyDown={onKeyDownHandler}
-				className={`modal wrapper bgc ${openModalValue}`}
+				className={`modal wrapper bgc ${openModalToEditValue}`}
 			>
-				<div className='modal__Form  '>
+				<div className='modal__Form modalToEdit  '>
 					<h2>Edytuj zadanie:</h2>
 					<p className='form__error'>{errorInfoEditedRecord}</p>
 					<input
@@ -183,7 +180,7 @@ function Table(props) {
 						name='description'
 						value={dataSelectedRecord.description}
 						type='text'
-						placeholder='Podaj któtki opis...'
+						placeholder='Podaj krótki opis przedmiotu...'
 						onChange={changeRecordText}
 					></input>
 					<select
@@ -214,7 +211,7 @@ function Table(props) {
 							Zatwierdź
 						</button>
 						<button
-							onClick={closeModal}
+							onClick={closeModalToEdit}
 							className='modal__Form__btn modal__Form__btn--btnCancel '
 						>
 							Anuluj
