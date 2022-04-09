@@ -11,7 +11,7 @@ Aplikacja, która pomaga podliczyć koszty nowego stanowiska komputerowego.
 Instalacja aplikacji opiera się na menedżerze pakietów [npm](https://www.npmjs.com/).
 ```bash
 git clone https://github.com/YerbaMatePL/REACT-Kalkulator-stanowiska-komputerowego.git
-cd kalkulator-rusztow
+cd kalkulator-app
 npm install
 ```
 Aby uruchomić aplikację użyj 
