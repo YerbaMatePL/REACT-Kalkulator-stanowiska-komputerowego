@@ -25,12 +25,18 @@ node server.js
 
 ## O aplikacji
 
-Aplikacja składa się z dwóch części - formularza oraz tabeli z podsumowaniem. 
-Formularz wypełnia użytkownik podając nazwę przedmiotu, jaki chce zakupić do swojego nowego stanowiska komputerowego, następnie formularz wymaga podania krótkiego opisu tego przedmiotu, np. wpisania modelu. W kolejnym kroku użytkownik przypisuje przedmiot do wybranej kategorii. A na końcu podaje cenę za wybrany przedmiot. Po kliknięciu przycisku “DODAJ”  uruchamia się walidacja, a dane zostają zapisane na serwerze. 
+- Aplikacja składa się z dwóch części - **formularza oraz tabeli z podsumowaniem**. 
+Formularz wypełnia użytkownik podając nazwę przedmiotu, jaki chce zakupić do swojego nowego stanowiska komputerowego, następnie formularz wymaga podania krótkiego opisu tego przedmiotu, np. wpisania modelu. W kolejnym kroku użytkownik przypisuje przedmiot do wybranej kategorii. A na końcu podaje cenę za wybrany przedmiot. **Po kliknięciu przycisku “DODAJ”  uruchamia się walidacja, a dane zostają zapisane na serwerze.** 
 
-Następnie dane te pobierane są z serwera i wyświetlane w formie tabeli. Każdy rekord posiada dwie możliwe akcje do wykonania - edycję wybranego rekordu, a także możliwość usunięcia danego rekordu z tabeli. 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/90143181/162560164-4646f826-6fac-492e-af9e-aefd380fe6b4.png"></p>
 
-Na samym końcu wyświetlane są dane z podsumowaniem: ilości przedmiotów w tabeli oraz łącznej kwoty, jaką trzeba będzie zapłacić za wybrane przedmioty. 
+- Następnie dane te pobierane są z serwera i wyświetlane w formie tabeli. Każdy rekord posiada dwie możliwe akcje do wykonania - **edycję wybranego rekordu**, a także **możliwość usunięcia danego rekordu z tabeli**. 
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/90143181/162560243-3a1c185a-dda7-47fd-bfe8-aa0a66670024.png"></p>
+
+- Na samym końcu **wyświetlane są dane z podsumowaniem**: ilości przedmiotów w tabeli oraz łącznej kwoty, jaką trzeba będzie zapłacić za wybrane przedmioty. 
 
 
 ## Języki i narzędzia
