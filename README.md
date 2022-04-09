@@ -1,6 +1,12 @@
 # Kalkulator stanowiska komputerowego w React.js
 Aplikacja, która pomaga podliczyć koszty nowego stanowiska komputerowego.
 
+ ## Spis treści
+* [Instalacja](#instalacja)
+* [O aplikacji](#o-aplikacji)
+* [Języki i narzędzia](#języki-i-narzędzia)
+* [Czego nauczył mnie ten projekt](#czego-nauczył-mnie-ten-projekt)
+
 ## Instalacja 
 Instalacja aplikacji opiera się na menedżerze pakietów [npm](https://www.npmjs.com/).
 ```bash
